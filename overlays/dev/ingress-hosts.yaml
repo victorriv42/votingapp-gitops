@@ -1,0 +1,7 @@
+# Patch JSON 6902 : remplace les hôtes de l'Ingress pour l'environnement dev
+- op: replace
+  path: /spec/rules/0/host
+  value: vote-dev.local
+- op: replace
+  path: /spec/rules/1/host
+  value: result-dev.local

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vote-dev
+  namespace: argocd          
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/victorriv42/votingapp-gitops.git
+    targetRevision: main
+    path: overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vote-dev
+  syncPolicy:
+    automated:
+      prune: true        # supprime du cluster ce qui a disparu de Git
+      selfHeal: true     # annule les modifications faites hors Git
+    syncOptions:
+      - CreateNamespace=true

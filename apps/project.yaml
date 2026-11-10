@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: voting
+  namespace: argocd
+spec:
+  description: Application de vote - environnements dev et prod
+  sourceRepos:
+    - https://github.com/victorriv42/votingapp-gitops.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: vote-dev
+    - server: https://kubernetes.default.svc
+      namespace: vote-prod
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceBlacklist:
+    - group: ""
+      kind: ResourceQuota
+    - group: ""
+      kind: LimitRange

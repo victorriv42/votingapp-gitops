@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Base commune à tous les environnements : aucun namespace, aucune valeur spécifique.
+resources:
+  - redis.yaml
+  - db.yaml
+  - vote.yaml
+  - result.yaml
+  - worker.yaml
+  - ingress.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: voting-app
+    includeSelectors: false
+
+# Le ConfigMap est généré : son nom reçoit un suffixe de hachage (vote-config-xxxxx)
+# et les Deployments qui le référencent sont réécrits automatiquement.
+configMapGenerator:
+  - name: vote-config
+    literals:
+      - OPTION_A=Cats
+      - OPTION_B=Dogs

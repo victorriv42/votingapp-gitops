@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vote-prod
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/victorriv42/votingapp-gitops.git
+    targetRevision: main
+    path: overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vote-prod
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

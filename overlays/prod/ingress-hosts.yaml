@@ -1,0 +1,7 @@
+# Patch JSON 6902 : hôtes de production
+- op: replace
+  path: /spec/rules/0/host
+  value: vote.local
+- op: replace
+  path: /spec/rules/1/host
+  value: result.local
