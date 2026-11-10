@@ -7,7 +7,6 @@ resources:
   - db.yaml
   - vote.yaml
   - result.yaml
-  - worker.yaml
   - ingress.yaml
 
 labels:
