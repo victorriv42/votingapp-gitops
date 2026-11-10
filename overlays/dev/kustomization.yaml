@@ -20,7 +20,7 @@ configMapGenerator:
   - name: vote-config
     behavior: merge
     literals:
-      - OPTION_A=Chats (dev)
+      - OPTION_A=Thé (dev)
       - OPTION_B=Chiens (dev)
 
 patches:
